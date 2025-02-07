@@ -6,6 +6,7 @@ import 'package:javidcoffee_android_app/app/app_controller.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/forgot_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/login_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/register_page.dart';
+import 'package:javidcoffee_android_app/features/auth/pages/reset_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/welcome_page.dart';
 import 'package:javidcoffee_android_app/features/connection/pages/no_internet_page.dart';
 import 'package:javidcoffee_android_app/features/home/pages/home_page.dart';
@@ -82,6 +83,12 @@ class _MyAppState extends State<MyApp> {
         GetPage(
           name: ForgotPage.routeName,
           page: () => const ForgotPage(),
+          curve: Curves.ease,
+          transition: Transition.cupertino,
+        ),
+        GetPage(
+          name: ResetPage.routeName,
+          page: () => const ResetPage(),
           curve: Curves.ease,
           transition: Transition.cupertino,
         ),
