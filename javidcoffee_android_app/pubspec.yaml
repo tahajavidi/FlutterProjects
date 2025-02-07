@@ -1,0 +1,63 @@
+name: javidcoffee_android_app
+description: "A new Flutter project."
+
+publish_to: "none"
+
+version: 2.0.0
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  dotenv: ^4.2.0
+  cupertino_icons: ^1.0.8
+  flutter_animate: ^4.5.2
+  supabase: ^2.6.2
+  supabase_flutter: ^2.8.3
+  flutter_dotenv: ^5.2.1
+  app_links: ^6.3.3
+  flex_color_scheme: ^8.1.0
+  get: ^4.6.6
+  connectivity_plus: ^6.1.2
+  font_awesome_flutter: ^10.8.0
+  animate_do: ^3.3.4
+  url_launcher: ^6.3.1
+  lottie: ^3.3.1
+  simple_gradient_text: ^1.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icon/
+    - assets/images/
+    - assets/animations/
+    - .env
+
+  fonts:
+    - family: IranianSans
+      fonts:
+        - asset: assets/fonts/IranianSans.ttf
+    - family: B_Koodak_Bold_0
+      fonts:
+        - asset: assets/fonts/B_Koodak_Bold_0.ttf
+    - family: B_Koodak_Outline_0
+      fonts:
+        - asset: assets/fonts/B_Koodak_Outline_0.ttf
+    - family: Vazir
+      fonts:
+        - asset: assets/fonts/Vazir.ttf
+    - family: Yekan
+      fonts:
+        - asset: assets/fonts/Yekan.ttf
