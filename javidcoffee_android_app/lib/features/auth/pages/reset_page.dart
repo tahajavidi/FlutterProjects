@@ -15,7 +15,7 @@ class _ResetPageState extends State<ResetPage> {
     return Scaffold(
       appBar: AppBar(),
       body: const Center(
-        child: Text("Forgot Page"),
+        child: Text("Reset Page"),
       ),
     );
   }
