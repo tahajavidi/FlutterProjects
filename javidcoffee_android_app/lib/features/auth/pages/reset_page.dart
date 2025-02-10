@@ -1,4 +1,11 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:javidcoffee_android_app/config/responsive.dart';
+import 'package:javidcoffee_android_app/config/size_config.dart';
+import 'package:javidcoffee_android_app/features/auth/components/auth_field.dart';
+import 'package:javidcoffee_android_app/features/auth/controllers/reset_controller.dart';
 
 class ResetPage extends StatefulWidget {
   const ResetPage({super.key});
@@ -10,13 +17,204 @@ class ResetPage extends StatefulWidget {
 }
 
 class _ResetPageState extends State<ResetPage> {
+  final ResetController resetController = Get.put(ResetController());
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: const Center(
-        child: Text("Reset Page"),
-      ),
-    );
+    SizeConfig().init(context);
+
+    if (Responsive.isMobile(context)) {
+      return Scaffold(
+        body: Obx(
+          () => Center(
+            child: resetController.resetLoading.value == false
+                ? SingleChildScrollView(
+                    child: Column(
+                      spacing: 50,
+                      children: [
+                        FadeInDown(
+                          animate: true,
+                          delay: const Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 800),
+                          child: const Text(
+                            "دوست عزیز\nاینجا رمز عبور خود را بازنشانی کنید!",
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        FadeInUp(
+                          animate: true,
+                          delay: const Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 800),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.screenWidth * 0.08,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                AuthField(
+                                  controller:
+                                      resetController.passwordController,
+                                  labelText: "رمز عبور",
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      resetController.isHidePass.value =
+                                          !resetController.isHidePass.value;
+                                    },
+                                    icon: resetController.isHidePass.value
+                                        ? const Icon(FontAwesomeIcons.eye)
+                                        : const Icon(FontAwesomeIcons.eyeSlash),
+                                  ),
+                                  obscureText: resetController.isHidePass.value,
+                                ),
+                                const SizedBox(height: 60),
+                                SizedBox(
+                                  height: 55,
+                                  width: SizeConfig.screenWidth * 0.8,
+                                  child: FilledButton(
+                                    onPressed: resetController.resetPassword,
+                                    child: const Center(
+                                      child: Text(
+                                        "بازنشانی",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 22,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 25),
+                                Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text(
+                                      "بازگشت به صفحه قبل",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        fontStyle: FontStyle.italic,
+                                        textBaseline: TextBaseline.ideographic,
+                                        overflow: TextOverflow.fade,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : const CircularProgressIndicator(),
+          ),
+        ),
+      );
+    } else {
+      return Scaffold(
+        body: Obx(
+          () => Center(
+            child: resetController.resetLoading.value == false
+                ? SingleChildScrollView(
+                    child: Column(
+                      spacing: 50,
+                      children: [
+                        FadeInDown(
+                          animate: true,
+                          delay: const Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 800),
+                          child: const Text(
+                            "دوست عزیز\nاینجا رمز عبور خود را بازنشانی کنید!",
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        FadeInUp(
+                          animate: true,
+                          delay: const Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 800),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.screenWidth * 0.1,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                AuthField(
+                                  controller:
+                                      resetController.passwordController,
+                                  labelText: "رمز عبور",
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      resetController.isHidePass.value =
+                                          !resetController.isHidePass.value;
+                                    },
+                                    icon: resetController.isHidePass.value
+                                        ? const Icon(FontAwesomeIcons.eye)
+                                        : const Icon(FontAwesomeIcons.eyeSlash),
+                                  ),
+                                  obscureText: resetController.isHidePass.value,
+                                ),
+                                const SizedBox(height: 60),
+                                SizedBox(
+                                  height: 65,
+                                  width: SizeConfig.screenWidth * 0.6,
+                                  child: FilledButton(
+                                    onPressed: resetController.resetPassword,
+                                    child: const Center(
+                                      child: Text(
+                                        "بازنشانی",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 25),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    right: SizeConfig.screenWidth * 0.05,
+                                  ),
+                                  child: Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text(
+                                        "بازگشت به صفحه قبل",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700,
+                                          fontStyle: FontStyle.italic,
+                                          textBaseline:
+                                              TextBaseline.ideographic,
+                                          overflow: TextOverflow.fade,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : const CircularProgressIndicator(),
+          ),
+        ),
+      );
+    }
   }
 }

@@ -22,7 +22,8 @@ class ForgotController extends GetxController {
 
         sendLoading.value = false;
 
-        StatusDialog().showSuccess("ایمیل با موفقیت ارسال شد.");
+        StatusDialog().showSuccess(
+            "ایمیل با موفقیت ارسال شد.لطفا به ایمیل ارسال شده مراجعه کنید.");
 
         emailController.clear();
 

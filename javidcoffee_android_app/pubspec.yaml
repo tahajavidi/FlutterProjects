@@ -23,12 +23,13 @@ dependencies:
   app_links: ^6.3.3
   flex_color_scheme: ^8.1.0
   get: ^4.6.6
-  connectivity_plus: ^6.1.2
+  connectivity_plus: ^6.1.3
   font_awesome_flutter: ^10.8.0
-  animate_do: ^3.3.4
+  animate_do: ^3.3.9
   url_launcher: ^6.3.1
   lottie: ^3.3.1
   simple_gradient_text: ^1.3.0
+  flutter_native_splash: ^2.4.4
 
 dev_dependencies:
   flutter_test:
@@ -61,3 +62,15 @@ flutter:
     - family: Yekan
       fonts:
         - asset: assets/fonts/Yekan.ttf
+
+flutter_native_splash:
+  image: assets/icon/AppLogo.png
+  color: "#42a5f5"
+  color_dark: "#42a5f5"
+  android_12:
+    image: assets/icon/AppLogo.png
+    color: "#42a5f5"
+    color_dark: "#42a5f5"
+  fullscreen: true
+  android: true
+  ios: true

@@ -57,6 +57,12 @@ class _MyAppState extends State<MyApp> {
       ),
       getPages: [
         GetPage(
+          name: HomePage.routeName,
+          page: () => const HomePage(),
+          curve: Curves.ease,
+          transition: Transition.cupertino,
+        ),
+        GetPage(
           name: WelcomePage.routeName,
           page: () => const WelcomePage(),
           curve: Curves.ease,

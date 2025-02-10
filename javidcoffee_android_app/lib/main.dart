@@ -8,6 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await dotenv.load();
   String supabaseKey = dotenv.env["SUPABASE_KEY"] ?? "";
   String supabaseUrl = dotenv.env["SUPABASE_URL"] ?? "";
@@ -16,7 +17,7 @@ Future<void> main() async {
     url: supabaseUrl,
     anonKey: supabaseKey,
     authOptions: const FlutterAuthClientOptions(
-      authFlowType: AuthFlowType.pkce,
+      authFlowType: AuthFlowType.implicit,
     ),
   );
 
