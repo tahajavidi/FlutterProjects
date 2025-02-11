@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:javidcoffee_android_app/config/responsive.dart';
 import 'package:javidcoffee_android_app/config/size_config.dart';
-import 'package:javidcoffee_android_app/features/home/controllers/home_controller.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ChatPage extends StatefulWidget {
+  const ChatPage({super.key});
 
-  static const routeName = "/home";
+  static const routeName = "/chat";
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ChatPage> createState() => _ChatPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final HomeController homeController = Get.put(HomeController());
-
+class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -28,7 +24,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("Home"),
+                Text("AI Chat"),
               ],
             ),
           ),

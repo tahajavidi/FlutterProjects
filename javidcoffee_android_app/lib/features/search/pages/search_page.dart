@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:javidcoffee_android_app/config/responsive.dart';
 import 'package:javidcoffee_android_app/config/size_config.dart';
-import 'package:javidcoffee_android_app/features/home/controllers/home_controller.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
 
-  static const routeName = "/home";
+  static const routeName = "/search";
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final HomeController homeController = Get.put(HomeController());
-
+class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -28,7 +24,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("Home"),
+                Text("Search"),
               ],
             ),
           ),

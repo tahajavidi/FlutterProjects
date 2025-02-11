@@ -8,11 +8,15 @@ import 'package:javidcoffee_android_app/features/auth/pages/login_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/register_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/reset_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/welcome_page.dart';
+import 'package:javidcoffee_android_app/features/chat/pages/chat_page.dart';
 import 'package:javidcoffee_android_app/features/connection/pages/no_internet_page.dart';
 import 'package:javidcoffee_android_app/features/home/pages/home_page.dart';
 import 'package:javidcoffee_android_app/features/policy/pages/policy_page.dart';
+import 'package:javidcoffee_android_app/features/products/pages/products_page.dart';
+import 'package:javidcoffee_android_app/features/search/pages/search_page.dart';
 import 'package:javidcoffee_android_app/features/splash/pages/splash_screen.dart';
 import 'package:javidcoffee_android_app/theme/app_theme.dart';
+import 'package:javidcoffee_android_app/view/view_page.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -48,7 +52,7 @@ class _MyAppState extends State<MyApp> {
                         ConnectivityResult.wifi
                 ? appController.user.value == null
                     ? const WelcomePage()
-                    : const HomePage()
+                    : const ViewPage()
                 : const NoInternetPage();
           } else {
             return const SplashScreen();
@@ -95,6 +99,24 @@ class _MyAppState extends State<MyApp> {
         GetPage(
           name: ResetPage.routeName,
           page: () => const ResetPage(),
+          curve: Curves.ease,
+          transition: Transition.cupertino,
+        ),
+        GetPage(
+          name: SearchPage.routeName,
+          page: () => const SearchPage(),
+          curve: Curves.ease,
+          transition: Transition.cupertino,
+        ),
+        GetPage(
+          name: ProductsPage.routeName,
+          page: () => const ProductsPage(),
+          curve: Curves.ease,
+          transition: Transition.cupertino,
+        ),
+        GetPage(
+          name: ChatPage.routeName,
+          page: () => const ChatPage(),
           curve: Curves.ease,
           transition: Transition.cupertino,
         ),
