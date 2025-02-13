@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:javidcoffee_android_app/config/responsive.dart';
 import 'package:javidcoffee_android_app/config/size_config.dart';
@@ -19,6 +19,23 @@ class _ChatPageState extends State<ChatPage> {
   final ChatController chatController = Get.put(ChatController());
 
   @override
+  void initState() {
+    super.initState();
+
+    if (chatController.messages.isNotEmpty) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(const Duration(milliseconds: 350), () {
+          chatController.scrollController.animateTo(
+            chatController.scrollController.position.maxScrollExtent * 3,
+            duration: const Duration(milliseconds: 2500),
+            curve: Curves.ease,
+          );
+        });
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
@@ -34,7 +51,7 @@ class _ChatPageState extends State<ChatPage> {
                 onPressed: () {
                   chatController.messages.clear();
                 },
-                icon: const Icon(Icons.delete),
+                icon: const Icon(Icons.delete_rounded),
               ),
             ),
           ],
@@ -52,15 +69,14 @@ class _ChatPageState extends State<ChatPage> {
                     }
 
                     return ListView.builder(
+                      controller: chatController.scrollController,
                       itemCount: chatController.messages.length,
                       itemBuilder: (context, index) {
                         final message = chatController.messages[index];
 
-                        if (kDebugMode) {
-                          print(message.isUser);
-                        }
-
-                        return ChatBubble(message: message);
+                        return ChatBubble(
+                          message: message,
+                        );
                       },
                     );
                   },
@@ -87,6 +103,7 @@ class _ChatPageState extends State<ChatPage> {
                       Expanded(
                         child: TextField(
                           controller: chatController.messageController,
+                          focusNode: chatController.myFocusNode,
                           decoration: const InputDecoration(
                             labelText: "...پیام",
                             labelStyle: TextStyle(fontWeight: FontWeight.bold),

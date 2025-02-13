@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class ClaudeApiService {
   static const String baseUrl = "https://api.aimlapi.com/v1";
   static const String model = "mistralai/Mistral-7B-Instruct-v0.2";
-  static const int maxTokens = 256;
+  static const int maxTokens = 512;
 
   final String _apiKey;
 

@@ -27,17 +27,17 @@ class _ViewPageState extends State<ViewPage> {
       return Scaffold(
         body: PageView(
           controller: viewController.pageController,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           children: [
-            HomePage(),
-            SearchPage(),
-            ProductsPage(),
-            ChatPage(),
+            const HomePage(),
+            const SearchPage(),
+            const ProductsPage(),
+            const ChatPage(),
           ],
         ),
         bottomNavigationBar: Localizations.override(
           context: context,
-          locale: Locale("en"),
+          locale: const Locale("en"),
           child: Obx(
             () => WaterDropNavBar(
               backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
@@ -48,7 +48,7 @@ class _ViewPageState extends State<ViewPage> {
                 viewController.selectedIndex.value = index;
                 viewController.pageController.animateToPage(
                   viewController.selectedIndex.value,
-                  duration: const Duration(milliseconds: 400),
+                  duration: const Duration(milliseconds: 500),
                   curve: Curves.easeOutQuad,
                 );
               },
@@ -76,7 +76,7 @@ class _ViewPageState extends State<ViewPage> {
         ),
       );
     } else {
-      return Scaffold(
+      return const Scaffold(
         body: Center(),
       );
     }

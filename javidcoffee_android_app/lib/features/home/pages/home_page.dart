@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: IconButton.filledTonal(
                 onPressed: () => homeController.logoutUser(),
-                icon: const Icon(Icons.delete),
+                icon: const Icon(Icons.logout_rounded),
               ),
             ),
           ],
