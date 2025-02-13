@@ -230,7 +230,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                       registerController.passwordController,
                                   labelText: "رمز عبور",
                                   suffixIcon: IconButton(
-                                    onPressed: registerController.toggleHidePass,
+                                    onPressed:
+                                        registerController.toggleHidePass,
                                     icon: registerController.isHidePass.value
                                         ? const Icon(FontAwesomeIcons.eye)
                                         : const Icon(FontAwesomeIcons.eyeSlash),
@@ -244,8 +245,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                       .confirmPasswordController,
                                   labelText: "تایید رمز عبور",
                                   suffixIcon: IconButton(
-                                    onPressed: 
-                                    registerController.toggleHideConf,
+                                    onPressed:
+                                        registerController.toggleHideConf,
                                     icon: registerController.isHideConf.value
                                         ? const Icon(FontAwesomeIcons.eye)
                                         : const Icon(FontAwesomeIcons.eyeSlash),

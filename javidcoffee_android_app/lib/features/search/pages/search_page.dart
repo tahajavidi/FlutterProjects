@@ -17,7 +17,7 @@ class _SearchPageState extends State<SearchPage> {
     SizeConfig().init(context);
 
     if (Responsive.isMobile(context)) {
-      return Scaffold(
+      return const Scaffold(
         body: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -31,7 +31,7 @@ class _SearchPageState extends State<SearchPage> {
         ),
       );
     } else {
-      return Scaffold(
+      return const Scaffold(
         body: Center(),
       );
     }

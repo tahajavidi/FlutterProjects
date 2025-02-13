@@ -11,16 +11,11 @@ import 'package:javidcoffee_android_app/features/auth/pages/register_page.dart';
 import 'package:javidcoffee_android_app/utils/status_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class WelcomePage extends StatefulWidget {
+class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
   static const routeName = "/welcome";
 
-  @override
-  State<WelcomePage> createState() => _WelcomePageState();
-}
-
-class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);

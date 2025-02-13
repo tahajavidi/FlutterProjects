@@ -17,7 +17,7 @@ class _ProductsPageState extends State<ProductsPage> {
     SizeConfig().init(context);
 
     if (Responsive.isMobile(context)) {
-      return Scaffold(
+      return const Scaffold(
         body: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -31,7 +31,7 @@ class _ProductsPageState extends State<ProductsPage> {
         ),
       );
     } else {
-      return Scaffold(
+      return const Scaffold(
         body: Center(),
       );
     }
