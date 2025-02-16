@@ -13,6 +13,7 @@ import 'package:javidcoffee_android_app/features/connection/pages/no_internet_pa
 import 'package:javidcoffee_android_app/features/home/pages/home_page.dart';
 import 'package:javidcoffee_android_app/features/policy/pages/policy_page.dart';
 import 'package:javidcoffee_android_app/features/products/pages/products_page.dart';
+import 'package:javidcoffee_android_app/features/profile/pages/profile_page.dart';
 import 'package:javidcoffee_android_app/features/search/pages/search_page.dart';
 import 'package:javidcoffee_android_app/features/splash/pages/splash_screen.dart';
 import 'package:javidcoffee_android_app/theme/app_theme.dart';
@@ -117,6 +118,12 @@ class _MyAppState extends State<MyApp> {
         GetPage(
           name: ChatPage.routeName,
           page: () => const ChatPage(),
+          curve: Curves.ease,
+          transition: Transition.cupertino,
+        ),
+        GetPage(
+          name: ProfilePage.routeName,
+          page: () => const ProfilePage(),
           curve: Curves.ease,
           transition: Transition.cupertino,
         ),

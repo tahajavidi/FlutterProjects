@@ -45,7 +45,7 @@ abstract final class AppTheme {
   );
   // The defined dark theme.
   static ThemeData dark = FlexThemeData.dark(
-    scaffoldBackground: Color(0xFF101010),
+    scaffoldBackground: const Color(0xFF101010),
     appBarBackground: const Color(0xFF121212),
     colors: const FlexSchemeColor(
       primary: Color(0xFFB1CFF5),

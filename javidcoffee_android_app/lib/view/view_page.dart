@@ -49,7 +49,7 @@ class _ViewPageState extends State<ViewPage> {
                 viewController.pageController.animateToPage(
                   viewController.selectedIndex.value,
                   duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeOutQuad,
+                  curve: Curves.ease,
                 );
               },
               selectedIndex: viewController.selectedIndex.value,

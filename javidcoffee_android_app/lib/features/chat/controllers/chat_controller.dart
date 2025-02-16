@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:javidcoffee_android_app/features/chat/models/message.dart';
 import 'package:javidcoffee_android_app/features/chat/services/claude_api_service.dart';
 import 'package:javidcoffee_android_app/utils/status_dialog.dart';
@@ -7,8 +8,8 @@ import 'package:javidcoffee_android_app/utils/status_dialog.dart';
 class ChatController extends GetxController {
   final TextEditingController messageController = TextEditingController();
   final ScrollController scrollController = ScrollController();
-  final apiService =
-      ClaudeApiService(apiKey: "854a8cba53634149876e3339ced36e26");
+
+  final apiService = ClaudeApiService(apiKey: dotenv.env["AI_API_KEY"] ?? "");
 
   final RxList<Message> messages = <Message>[].obs;
 

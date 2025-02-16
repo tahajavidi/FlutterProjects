@@ -19,23 +19,22 @@ class HomeSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      carouselController: homeController.carouselController,
-      items: homeController.sliderBanners
-          .map(
-            (url) => SliderBanner(bannerUrl: url.bannerUrl),
-          )
-          .toList(),
-      options: CarouselOptions(
-        height: Responsive.isTablet(context) ? 280 : 230,
-        viewportFraction: viewportFraction,
-        autoPlay: true,
-        onPageChanged: (index, reason) => onPageChanged(index),
+    return Animate(
+      effects: [const FadeEffect(delay: Duration(milliseconds: 100))],
+      child: CarouselSlider(
+        carouselController: homeController.carouselController,
+        items: homeController.sliderBanners
+            .map(
+              (url) => SliderBanner(bannerUrl: url.bannerUrl),
+            )
+            .toList(),
+        options: CarouselOptions(
+          height: Responsive.isTablet(context) ? 270 : 220,
+          viewportFraction: viewportFraction,
+          autoPlay: true,
+          onPageChanged: (index, reason) => onPageChanged(index),
+        ),
       ),
-    ).animate().fade(
-          delay: const Duration(milliseconds: 200),
-          duration: const Duration(milliseconds: 700),
-          curve: Curves.ease,
-        );
+    );
   }
 }
