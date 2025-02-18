@@ -43,6 +43,10 @@ class ProductCarousel extends StatelessWidget {
                     .primaryContainer
                     .withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(10.0),
+                border: Border.all(
+                  color: Colors.transparent,
+                  width: 2.5,
+                ),
               ),
               child: Center(
                 child: Column(

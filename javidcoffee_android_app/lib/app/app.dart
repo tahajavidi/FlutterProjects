@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:javidcoffee_android_app/app/app_controller.dart';
+import 'package:javidcoffee_android_app/features/admin/pages/admin_panel_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/forgot_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/login_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/register_page.dart';
@@ -10,6 +11,7 @@ import 'package:javidcoffee_android_app/features/auth/pages/reset_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/welcome_page.dart';
 import 'package:javidcoffee_android_app/features/chat/pages/chat_page.dart';
 import 'package:javidcoffee_android_app/features/connection/pages/no_internet_page.dart';
+import 'package:javidcoffee_android_app/features/details/pages/details_page.dart';
 import 'package:javidcoffee_android_app/features/home/pages/home_page.dart';
 import 'package:javidcoffee_android_app/features/policy/pages/policy_page.dart';
 import 'package:javidcoffee_android_app/features/products/pages/products_page.dart';
@@ -124,6 +126,18 @@ class _MyAppState extends State<MyApp> {
         GetPage(
           name: ProfilePage.routeName,
           page: () => const ProfilePage(),
+          curve: Curves.ease,
+          transition: Transition.cupertino,
+        ),
+        GetPage(
+          name: AdminPanelPage.routeName,
+          page: () => const AdminPanelPage(),
+          curve: Curves.ease,
+          transition: Transition.cupertino,
+        ),
+        GetPage(
+          name: DetailsPage.routeName,
+          page: () => const DetailsPage(),
           curve: Curves.ease,
           transition: Transition.cupertino,
         ),

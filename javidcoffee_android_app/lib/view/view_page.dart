@@ -46,6 +46,7 @@ class _ViewPageState extends State<ViewPage> {
                   Theme.of(context).colorScheme.secondaryContainer,
               onItemSelected: (index) {
                 viewController.selectedIndex.value = index;
+
                 viewController.pageController.animateToPage(
                   viewController.selectedIndex.value,
                   duration: const Duration(milliseconds: 500),
