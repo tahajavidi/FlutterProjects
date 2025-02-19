@@ -52,7 +52,11 @@ class _MyAppState extends State<MyApp> {
             return appController.results.first.obs.value ==
                         ConnectivityResult.mobile ||
                     appController.results.first.obs.value ==
-                        ConnectivityResult.wifi
+                        ConnectivityResult.wifi ||
+                    appController.results.first.obs.value ==
+                        ConnectivityResult.vpn ||
+                    appController.results.first.obs.value !=
+                        ConnectivityResult.vpn
                 ? appController.user.value == null
                     ? const WelcomePage()
                     : const ViewPage()
