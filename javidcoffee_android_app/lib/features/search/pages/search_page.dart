@@ -94,8 +94,11 @@ class _SearchPageState extends State<SearchPage> {
                         title: Text(product['title']),
                         subtitle: Text(
                             "${NumberFormat.decimalPatternDigits(locale: "fa", decimalDigits: 0).format(product['price'])} تومان"),
-                        leading: Image.network(product['image'][0],
-                            width: 50, height: 50, fit: BoxFit.cover),
+                        leading: Hero(
+                          tag: "${product['id']}_${product['image'][0]}",
+                          child: Image.network(product['image'][0],
+                              width: 50, height: 50, fit: BoxFit.cover),
+                        ),
                         onTap: () {
                           Get.to(DetailsPage(pr: Product.fromJson(product)));
                         },

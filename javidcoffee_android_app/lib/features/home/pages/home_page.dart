@@ -99,11 +99,14 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: IconButton.filledTonal(
-                onPressed: () => homeController.logoutUser(),
-                icon: const Icon(Icons.logout_rounded),
+            Animate(
+              effects: [const FadeEffect(delay: Duration(milliseconds: 100))],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: IconButton.filledTonal(
+                  onPressed: () => homeController.logoutUser(),
+                  icon: const Icon(Icons.logout_rounded),
+                ),
               ),
             ),
           ],
@@ -137,38 +140,53 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              FutureBuilder(
-                future: homeController.gridData,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ProductCarousel(
-                      snapshot: snapshot,
-                    );
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return Animate(
-                      effects: [
-                        const ShimmerEffect(
-                          delay: Duration(milliseconds: 100),
-                          duration: Duration(milliseconds: 300),
-                          blendMode: BlendMode.overlay,
-                        ),
-                      ],
-                      child: Container(
-                        height: SizeConfig.screenHeight * 0.22,
-                        width: SizeConfig.screenWidth,
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        decoration: const BoxDecoration(
-                          color: Colors.grey,
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          "دستگاه قهوه ساز",
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ),
-                    );
-                  } else {
-                    return Center(
-                      child: Text("${snapshot.error}"),
-                    );
-                  }
-                },
+                    ],
+                  ),
+                  FutureBuilder(
+                    future: homeController.gridData,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return ProductCarousel(
+                          snapshot: snapshot,
+                        );
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return Animate(
+                          effects: [
+                            const ShimmerEffect(
+                              delay: Duration(milliseconds: 100),
+                              duration: Duration(milliseconds: 300),
+                              blendMode: BlendMode.overlay,
+                            ),
+                          ],
+                          child: Container(
+                            height: SizeConfig.screenHeight * 0.22,
+                            width: SizeConfig.screenWidth,
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            decoration: const BoxDecoration(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Center(
+                          child: Text("${snapshot.error}"),
+                        );
+                      }
+                    },
+                  ),
+                ],
               ),
             ],
           ),

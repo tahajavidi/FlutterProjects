@@ -4,45 +4,50 @@ import 'package:javidcoffee_android_app/utils/status_dialog.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AdminPanelController extends GetxController {
-  late Future<dynamic> getProducts;
-
   final SupabaseClient supabase = Supabase.instance.client;
 
+  RxList<dynamic> products = <dynamic>[].obs;
   RxBool isLoading = false.obs;
 
-  Future<dynamic> fetchProducts() async {
-    final future =
-        await supabase.from('ads').select().order('id', ascending: true);
+  @override
+  void onInit() {
+    getProductsData();
+    super.onInit();
+  }
 
-    return future;
+  Future<void> getProductsData() async {
+    try {
+      isLoading.value = true;
+
+      final response =
+          await supabase.from('ads').select().order('id', ascending: true);
+      products.assignAll(response);
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      StatusDialog().showError("خطا در دریافت محصولات");
+      if (kDebugMode) {
+        print("Error fetching products: ${e.toString()}");
+      }
+    }
   }
 
   Future<void> deleteProduct(int productId) async {
     isLoading.value = true;
-
     try {
       await supabase.from('ads').delete().eq("id", productId);
-      await fetchProducts();
       if (kDebugMode) {
-        print("deleted");
+        print("Product deleted successfully");
       }
 
-      isLoading.value = false;
       StatusDialog().showSuccess("محصول با موفقیت حذف شد.");
+      getProductsData();
     } catch (e) {
-      isLoading.value = false;
       StatusDialog().showError(e.toString());
       if (kDebugMode) {
-        print('Error deleting product: ${e.toString()}');
+        print("Error deleting product: ${e.toString()}");
       }
     }
-
     isLoading.value = false;
-  }
-
-  @override
-  void onInit() {
-    getProducts = fetchProducts();
-    super.onInit();
   }
 }

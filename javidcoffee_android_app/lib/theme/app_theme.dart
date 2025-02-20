@@ -32,15 +32,15 @@ abstract final class AppTheme {
     ),
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true),
-    textTheme: const TextTheme(
-      titleLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-      titleMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-      titleSmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-      bodyLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-      bodyMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-      bodySmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-      labelLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-    ),
+    // textTheme: const TextTheme(
+    //   titleLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+    //   titleMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+    //   titleSmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+    //   bodyLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+    //   bodyMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+    //   bodySmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+    //   labelLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+    // ),
     fontFamily: "Yekan",
   );
   // The defined dark theme.
@@ -75,15 +75,15 @@ abstract final class AppTheme {
     ),
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true),
-    textTheme: const TextTheme(
-      titleLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-      titleMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-      titleSmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-      bodyLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-      bodyMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-      bodySmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-      labelLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-    ),
+    // textTheme: const TextTheme(
+    //   titleLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+    //   titleMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+    //   titleSmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+    //   bodyLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+    //   bodyMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+    //   bodySmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+    //   labelLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+    // ),
     fontFamily: "Yekan",
   );
 }
