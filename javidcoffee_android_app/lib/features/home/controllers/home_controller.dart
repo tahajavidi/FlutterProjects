@@ -40,7 +40,7 @@ class HomeController extends GetxController {
     final Future<dynamic> future = supabaseClient
         .from("ads")
         .select()
-        .eq("category", ["machine"]).order("id", ascending: true);
+        .eq("category", "دستگاه").order("id", ascending: true);
 
     return future;
   }

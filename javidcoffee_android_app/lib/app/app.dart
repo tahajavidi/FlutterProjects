@@ -4,6 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:javidcoffee_android_app/app/app_controller.dart';
 import 'package:javidcoffee_android_app/features/admin/pages/admin_panel_page.dart';
+import 'package:javidcoffee_android_app/features/admin/pages/edit_product_page.dart';
+import 'package:javidcoffee_android_app/features/admin/pages/new_product_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/forgot_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/login_page.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/register_page.dart';
@@ -71,79 +73,91 @@ class _MyAppState extends State<MyApp> {
           name: HomePage.routeName,
           page: () => const HomePage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: WelcomePage.routeName,
           page: () => const WelcomePage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: RegisterPage.routeName,
           page: () => const RegisterPage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: LoginPage.routeName,
           page: () => const LoginPage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: PolicyPage.routeName,
           page: () => const PolicyPage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: ForgotPage.routeName,
           page: () => const ForgotPage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: ResetPage.routeName,
           page: () => const ResetPage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: SearchPage.routeName,
           page: () => const SearchPage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: ProductsPage.routeName,
           page: () => const ProductsPage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: ChatPage.routeName,
           page: () => const ChatPage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: ProfilePage.routeName,
           page: () => const ProfilePage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: AdminPanelPage.routeName,
           page: () => const AdminPanelPage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
         ),
         GetPage(
           name: DetailsPage.routeName,
           page: () => const DetailsPage(),
           curve: Curves.ease,
-          transition: Transition.cupertino,
+          transition: Transition.leftToRightWithFade,
+        ),
+        GetPage(
+          name: EditProductPage.routeName,
+          page: () => const EditProductPage(),
+          curve: Curves.ease,
+          transition: Transition.leftToRightWithFade,
+        ),
+        GetPage(
+          name: NewProductPage.routeName,
+          page: () => const NewProductPage(),
+          curve: Curves.ease,
+          transition: Transition.leftToRightWithFade,
         ),
       ],
     );

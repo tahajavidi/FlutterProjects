@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:javidcoffee_android_app/config/responsive.dart';
 import 'package:javidcoffee_android_app/config/size_config.dart';
 import 'package:javidcoffee_android_app/features/admin/controllers/admin_panel_controller.dart';
+import 'package:javidcoffee_android_app/features/admin/pages/edit_product_page.dart';
+import 'package:javidcoffee_android_app/features/admin/pages/new_product_page.dart';
 import 'package:javidcoffee_android_app/features/home/models/product.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
@@ -32,10 +34,10 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () => Get.toNamed(NewProductPage.routeName),
                 icon: const Icon(
                   Icons.add_rounded,
-                  size: 35,
+                  size: 30,
                   color: Colors.blue,
                 ),
               ),
@@ -69,8 +71,12 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                     trailing: IconButton(
                       onPressed: () =>
                           adminPanelController.deleteProduct(pr.id!),
-                      icon: const Icon(Icons.delete, color: Colors.redAccent),
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Colors.redAccent,
+                      ),
                     ),
+                    onTap: () => Get.toNamed(EditProductPage.routeName),
                   );
                 },
               );

@@ -104,6 +104,7 @@ class _ChatPageState extends State<ChatPage> {
                         child: TextField(
                           controller: chatController.messageController,
                           focusNode: chatController.myFocusNode,
+                          maxLines: null,
                           decoration: const InputDecoration(
                             labelText: "...پیام",
                             labelStyle: TextStyle(fontWeight: FontWeight.bold),

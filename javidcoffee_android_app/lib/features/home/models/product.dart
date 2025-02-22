@@ -5,7 +5,7 @@ class Product {
   int? price;
   List<dynamic>? image;
   String? desc;
-  List<dynamic>? category;
+  String? category;
 
   Product(this.id, this.created, this.title, this.price, this.image, this.desc);
 
