@@ -40,62 +40,52 @@ class _NewProductPageState extends State<NewProductPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       spacing: 20.0,
                       children: [
-                        SizedBox(
-                          height: SizeConfig.screenHeight * 0.22,
-                          child: Expanded(
-                            child: Obx(
-                              () => newProductController.selectedImages.isEmpty
-                                  ? Center(
-                                      child: Container(
-                                        height: SizeConfig.screenHeight * 0.22,
-                                        width: SizeConfig.screenWidth * 0.5,
-                                        decoration: BoxDecoration(
-                                          color: Get.isDarkMode
-                                              ? Colors.grey[700]
-                                              : Colors.grey[300],
-                                          borderRadius:
-                                              BorderRadius.circular(16.0),
-                                        ),
-                                        child: const Center(
-                                          child:
-                                              Text("ابتدا تصویری انتخاب کنید!"),
-                                        ),
-                                      ),
-                                    )
-                                  : SizedBox(
-                                      height: SizeConfig.screenHeight * 0.22,
-                                      child: ListView.builder(
-                                        padding: const EdgeInsets.all(10),
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: newProductController
-                                            .selectedImages.length,
-                                        itemBuilder: (context, index) {
-                                          return Container(
-                                            height:
-                                                SizeConfig.screenHeight * 0.22,
-                                            width:
-                                                SizeConfig.screenWidth * 0.38,
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 5.0),
-                                            decoration: BoxDecoration(
-                                              color: Colors.grey[300],
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                              image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: FileImage(
-                                                  File(newProductController
-                                                      .selectedImages[index]
-                                                      .path),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
+                        Obx(
+                          () => newProductController.selectedImages.isEmpty
+                              ? Center(
+                                  child: Container(
+                                    height: SizeConfig.screenHeight * 0.22,
+                                    width: SizeConfig.screenWidth * 0.5,
+                                    decoration: BoxDecoration(
+                                      color: Get.isDarkMode
+                                          ? Colors.grey[700]
+                                          : Colors.grey[300],
+                                      borderRadius: BorderRadius.circular(16.0),
                                     ),
-                            ),
-                          ),
+                                    child: const Center(
+                                      child: Text("ابتدا تصویری انتخاب کنید!"),
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(
+                                  height: SizeConfig.screenHeight * 0.22,
+                                  child: ListView.builder(
+                                    padding: const EdgeInsets.all(10),
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: newProductController
+                                        .selectedImages.length,
+                                    itemBuilder: (context, index) {
+                                      return Container(
+                                        height: SizeConfig.screenHeight * 0.22,
+                                        width: SizeConfig.screenWidth * 0.38,
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5.0),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[300],
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: FileImage(
+                                              File(newProductController
+                                                  .selectedImages[index].path),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
                         ),
                         const SizedBox(height: 5.0),
                         AdminTextField(

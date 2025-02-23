@@ -1,10 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:javidcoffee_android_app/features/admin/controllers/new_product_controller.dart';
 import 'package:javidcoffee_android_app/utils/status_dialog.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AdminPanelController extends GetxController {
-  final SupabaseClient supabase = Supabase.instance.client;
+  final SupabaseClient supabaseClient = Supabase.instance.client;
+  final NewProductController newProductController =
+      Get.put(NewProductController());
 
   RxList<dynamic> products = <dynamic>[].obs;
   RxBool isLoading = false.obs;
@@ -19,8 +22,10 @@ class AdminPanelController extends GetxController {
     try {
       isLoading.value = true;
 
-      final response =
-          await supabase.from('ads').select().order('id', ascending: true);
+      final response = await supabaseClient
+          .from('ads')
+          .select()
+          .order('id', ascending: true);
       products.assignAll(response);
       isLoading.value = false;
     } catch (e) {
@@ -35,7 +40,7 @@ class AdminPanelController extends GetxController {
   Future<void> deleteProduct(int productId) async {
     isLoading.value = true;
     try {
-      await supabase.from('ads').delete().eq("id", productId);
+      await supabaseClient.from('ads').delete().eq("id", productId);
       if (kDebugMode) {
         print("Product deleted successfully");
       }

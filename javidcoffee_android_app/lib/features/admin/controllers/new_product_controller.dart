@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:javidcoffee_android_app/utils/status_dialog.dart';
+import 'package:javidcoffee_android_app/utils/translate_path.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class NewProductController extends GetxController {
@@ -18,57 +19,6 @@ class NewProductController extends GetxController {
   RxList<XFile> selectedImages = <XFile>[].obs;
   RxBool isLoading = false.obs;
 
-  String transliteratePersianToEnglish(String persianText) {
-    Map<String, String> transliterationMap = {
-      'ا': 'a',
-      'ب': 'b',
-      'پ': 'p',
-      'ت': 't',
-      'ث': 'th',
-      'ج': 'j',
-      'چ': 'ch',
-      'ح': 'h',
-      'خ': 'kh',
-      'د': 'd',
-      'ذ': 'z',
-      'ر': 'r',
-      'ز': 'z',
-      'ژ': 'zh',
-      'س': 's',
-      'ش': 'sh',
-      'ص': 's',
-      'ض': 'z',
-      'ط': 't',
-      'ظ': 'z',
-      'ع': 'a',
-      'غ': 'gh',
-      'ف': 'f',
-      'ق': 'gh',
-      'ک': 'k',
-      'گ': 'g',
-      'ل': 'l',
-      'م': 'm',
-      'ن': 'n',
-      'و': 'v',
-      'ه': 'h',
-      'ی': 'y',
-      'ئ': 'e',
-      'آ': 'aa',
-      'او': 'oo'
-    };
-
-    String result = '';
-    for (int i = 0; i < persianText.length; i++) {
-      String char = persianText[i];
-      if (transliterationMap.containsKey(char)) {
-        result += transliterationMap[char]!;
-      } else {
-        result += char;
-      }
-    }
-    return result;
-  }
-
   Future<void> pickImages() async {
     final List<XFile>? images = await picker?.pickMultiImage();
     if (picker != null && images != null) {
@@ -76,7 +26,7 @@ class NewProductController extends GetxController {
     }
   }
 
-  Future<List<String>> uploadImagesToStorage() async {
+  Future<List<String>> uploadImagesToStorage(String descText) async {
     final DateTime now = DateTime.now();
     List<String> uploadedUrls = [];
 
@@ -84,10 +34,10 @@ class NewProductController extends GetxController {
       for (XFile image in selectedImages) {
         File file = File(image.path);
 
-        String fileName = transliteratePersianToEnglish(
+        String fileName = TranslatePath().transliteratePersianToEnglish(
             "${DateTime.now().millisecondsSinceEpoch}_${image.name}");
         String folderName =
-            "${transliteratePersianToEnglish(descController.text).length >= 10 ? transliteratePersianToEnglish(descController.text).substring(0, 10) : transliteratePersianToEnglish(descController.text)}_$now";
+            "${TranslatePath().transliteratePersianToEnglish(descText).length >= 10 ? TranslatePath().transliteratePersianToEnglish(descText).substring(0, 10) : TranslatePath().transliteratePersianToEnglish(descText)}_$now";
 
         String encodedFileName = Uri.encodeComponent(fileName);
         String encodedFolderName = Uri.encodeComponent(folderName);
@@ -104,11 +54,9 @@ class NewProductController extends GetxController {
 
         String imageUrl = supabaseClient.storage
             .from('product-images')
-            .getPublicUrl(fileName);
+            .getPublicUrl(encodedUri);
         uploadedUrls.add(imageUrl);
       }
-
-      return uploadedUrls;
     } catch (e) {
       StatusDialog().showError(e.toString());
 
@@ -128,7 +76,7 @@ class NewProductController extends GetxController {
           isLoading.value = true;
 
           try {
-            List<String> imageUrls = await uploadImagesToStorage();
+            List<String> imageUrls = await uploadImagesToStorage(descController.text.trim());
 
             await supabaseClient.from('ads').insert({
               'title': titleController.text.trim(),
@@ -156,8 +104,10 @@ class NewProductController extends GetxController {
             }
           }
         } else {
-          StatusDialog().showWarning("لطفا دسته بندی را انتخاب کنید!");
+          StatusDialog().showWarning("لطفا تمامی فرم ها را پر کنید!");
         }
+      } else {
+        StatusDialog().showWarning("لطفا دسته بندی را انتخاب کنید!");
       }
     } else {
       StatusDialog().showWarning("لطفا حداقل یک تصویر انتخاب کنید!");

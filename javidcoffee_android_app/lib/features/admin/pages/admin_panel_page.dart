@@ -46,9 +46,9 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
         ),
         body: LiquidPullToRefresh(
           onRefresh: () async => adminPanelController.getProductsData(),
-          height: 200,
+          height: 250,
           animSpeedFactor: 3,
-          showChildOpacityTransition: false,
+          showChildOpacityTransition: true,
           child: Obx(
             () {
               if (adminPanelController.isLoading.value) {
@@ -76,7 +76,10 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                         color: Colors.redAccent,
                       ),
                     ),
-                    onTap: () => Get.toNamed(EditProductPage.routeName),
+                    onTap: () => Get.toNamed(
+                      EditProductPage.routeName,
+                      arguments: pr,
+                    ),
                   );
                 },
               );
