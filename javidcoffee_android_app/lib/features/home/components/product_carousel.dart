@@ -8,7 +8,7 @@ import 'package:javidcoffee_android_app/features/details/pages/details_page.dart
 import 'package:javidcoffee_android_app/features/home/models/product.dart';
 
 class ProductCarousel extends StatelessWidget {
-  final AsyncSnapshot<dynamic> snapshot;
+  final RxList<dynamic> snapshot;
 
   const ProductCarousel({
     super.key,
@@ -19,8 +19,7 @@ class ProductCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    Iterable iterable = snapshot.data;
-    var list = iterable.map((e) => Product.fromJson(e)).toList();
+    List<Product> list = snapshot.map((e) => Product.fromJson(e)).toList();
 
     return Animate(
       effects: [const FadeEffect(delay: Duration(milliseconds: 100))],

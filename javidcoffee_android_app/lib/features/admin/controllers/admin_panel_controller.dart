@@ -22,7 +22,7 @@ class AdminPanelController extends GetxController {
     try {
       isLoading.value = true;
 
-      final response = await supabaseClient
+      final List<dynamic> response = await supabaseClient
           .from('ads')
           .select()
           .order('id', ascending: true);

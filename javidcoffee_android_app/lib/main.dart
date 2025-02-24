@@ -3,7 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
 import 'package:javidcoffee_android_app/app/app.dart';
+import 'package:javidcoffee_android_app/features/home/controllers/home_controller.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -26,6 +28,8 @@ Future<void> main() async {
       print(uri.toString());
     }
   });
+
+  Get.create(() => HomeController());
 
   runApp(const MyApp());
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

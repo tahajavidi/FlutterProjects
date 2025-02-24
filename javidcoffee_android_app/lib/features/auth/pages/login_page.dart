@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                       TextButton(
                                         onPressed: () {
-                                          Navigator.pop(context);
+                                          Get.back();
                                         },
                                         child: const Text(
                                           "ثبت نام کنید",
@@ -277,7 +277,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      Navigator.pop(context);
+                                      Get.back();
                                     },
                                     child: const Text(
                                       "ثبت نام کنید",

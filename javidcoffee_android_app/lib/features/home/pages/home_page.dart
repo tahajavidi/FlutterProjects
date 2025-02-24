@@ -32,6 +32,14 @@ class _HomePageState extends State<HomePage> {
           title: Obx(
             () {
               if (homeController.isAdmin.value) {
+                if (homeController.userData.isEmpty) {
+                  return CircularProgressIndicator.adaptive(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).colorScheme.secondary,
+                    ),
+                  );
+                }
+
                 return Animate(
                   effects: [
                     const FadeEffect(delay: Duration(milliseconds: 100))
@@ -52,48 +60,33 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               } else {
-                return FutureBuilder(
-                  future: homeController.userData,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Animate(
-                        effects: [
-                          const FadeEffect(delay: Duration(milliseconds: 100))
-                        ],
-                        child: FilledButton.tonalIcon(
-                          onPressed: () => Get.toNamed(ProfilePage.routeName),
-                          label: Text(
-                            snapshot.data["name"].toString(),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                              fontFamily: "",
-                            ),
-                          ),
-                          icon: const Icon(
-                            Icons.person_rounded,
-                            size: 22,
-                          ),
-                        ),
-                      );
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.waiting) {
-                      return CircularProgressIndicator.adaptive(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          Theme.of(context).colorScheme.secondary,
-                        ),
-                      );
-                    } else {
-                      return const Text(
-                        "خطای شبکه",
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      );
-                    }
-                  },
+                if (homeController.userData.isEmpty) {
+                  return CircularProgressIndicator.adaptive(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).colorScheme.secondary,
+                    ),
+                  );
+                }
+
+                return Animate(
+                  effects: [
+                    const FadeEffect(delay: Duration(milliseconds: 100))
+                  ],
+                  child: FilledButton.tonalIcon(
+                    onPressed: () => Get.toNamed(ProfilePage.routeName),
+                    label: Text(
+                      homeController.userData["name"].toString(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                        fontFamily: "",
+                      ),
+                    ),
+                    icon: const Icon(
+                      Icons.person_rounded,
+                      size: 22,
+                    ),
+                  ),
                 );
               }
             },
@@ -153,15 +146,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  FutureBuilder(
-                    future: homeController.gridData,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return ProductCarousel(
-                          snapshot: snapshot,
-                        );
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.waiting) {
+                  Obx(
+                    () {
+                      if (homeController.isLoadingMachines.value) {
                         return Animate(
                           effects: [
                             const ShimmerEffect(
@@ -179,11 +166,10 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         );
-                      } else {
-                        return Center(
-                          child: Text("${snapshot.error}"),
-                        );
                       }
+                      return ProductCarousel(
+                        snapshot: homeController.machines,
+                      );
                     },
                   ),
                 ],

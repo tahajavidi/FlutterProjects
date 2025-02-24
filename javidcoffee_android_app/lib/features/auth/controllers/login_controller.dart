@@ -8,8 +8,7 @@ class LoginController extends GetxController {
   final SupabaseClient supabaseClient = Supabase.instance.client;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final HomeController homeController = Get.find<HomeController>();
-
+  
   RxBool isHidePass = true.obs;
   RxBool loginLoading = false.obs;
 
@@ -19,6 +18,7 @@ class LoginController extends GetxController {
 
   Future<void> loginUser() async {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      final HomeController homeController = Get.find<HomeController>();
       loginLoading.value = true;
 
       try {
@@ -29,12 +29,11 @@ class LoginController extends GetxController {
 
         if (response.user != null) {
           await homeController.getIsAdmin();
+          await homeController.fetchUserData();
         }
 
         loginLoading.value = false;
-
         Get.back();
-
         StatusDialog().showSuccess("ورود با موفقیت انجام شد.");
 
         emailController.clear();
