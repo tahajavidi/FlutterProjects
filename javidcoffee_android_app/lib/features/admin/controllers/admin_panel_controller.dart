@@ -1,13 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:javidcoffee_android_app/features/admin/controllers/new_product_controller.dart';
 import 'package:javidcoffee_android_app/utils/status_dialog.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AdminPanelController extends GetxController {
   final SupabaseClient supabaseClient = Supabase.instance.client;
-  final NewProductController newProductController =
-      Get.put(NewProductController());
 
   RxList<dynamic> products = <dynamic>[].obs;
   RxBool isLoading = false.obs;

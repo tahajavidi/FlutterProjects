@@ -17,6 +17,7 @@ import 'package:javidcoffee_android_app/features/details/pages/details_page.dart
 import 'package:javidcoffee_android_app/features/home/pages/home_page.dart';
 import 'package:javidcoffee_android_app/features/policy/pages/policy_page.dart';
 import 'package:javidcoffee_android_app/features/products/pages/products_page.dart';
+import 'package:javidcoffee_android_app/features/profile/pages/edit_profile_page.dart';
 import 'package:javidcoffee_android_app/features/profile/pages/profile_page.dart';
 import 'package:javidcoffee_android_app/features/search/pages/search_page.dart';
 import 'package:javidcoffee_android_app/features/splash/pages/splash_screen.dart';
@@ -132,6 +133,12 @@ class _MyAppState extends State<MyApp> {
         GetPage(
           name: ProfilePage.routeName,
           page: () => const ProfilePage(),
+          curve: Curves.ease,
+          transition: Transition.leftToRightWithFade,
+        ),
+        GetPage(
+          name: EditProfilePage.routeName,
+          page: () => const EditProfilePage(),
           curve: Curves.ease,
           transition: Transition.leftToRightWithFade,
         ),
