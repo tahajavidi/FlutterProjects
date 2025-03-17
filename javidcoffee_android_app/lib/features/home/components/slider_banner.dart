@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:javidcoffee_android_app/config/responsive.dart';
+import 'package:sizer/sizer.dart';
 
 class SliderBanner extends StatelessWidget {
   final String bannerUrl;
@@ -8,15 +10,25 @@ class SliderBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Responsive().init(100.w);
+
     return Container(
-      margin: const EdgeInsets.only(
-        left: 15.0,
-        right: 15.0,
-        top: 8.0,
-        bottom: 15.0,
+      margin: EdgeInsets.only(
+        left: Responsive.isMobile
+            ? 1.5.w
+            : Responsive.isTablet
+                ? 2.w
+                : 0.5.w,
+        right: Responsive.isMobile
+            ? 1.5.w
+            : Responsive.isTablet
+                ? 2.w
+                : 0.5.w,
+        top: 1.0.h,
+        bottom: 0.8.h,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(10.0.sp),
         image: DecorationImage(
           image: AssetImage(bannerUrl),
           fit: BoxFit.fill,
@@ -24,8 +36,8 @@ class SliderBanner extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(Get.isDarkMode ? 0.3 : 0.6),
-            spreadRadius: 3,
-            blurRadius: 10,
+            spreadRadius: 2.sp,
+            blurRadius: 10.sp,
             offset: const Offset(0, 3),
           )
         ],

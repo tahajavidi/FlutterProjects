@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,7 @@ import 'package:javidcoffee_android_app/features/search/pages/search_page.dart';
 import 'package:javidcoffee_android_app/features/splash/pages/splash_screen.dart';
 import 'package:javidcoffee_android_app/theme/app_theme.dart';
 import 'package:javidcoffee_android_app/view/view_page.dart';
+import 'package:sizer/sizer.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -36,137 +38,153 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "JavidCoffee",
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [Locale('fa'), Locale("en")],
-      locale: const Locale("fa"),
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
-      home: Obx(
-        () {
-          if (appController.results.isNotEmpty) {
-            return appController.results.first.obs.value ==
-                        ConnectivityResult.mobile ||
-                    appController.results.first.obs.value ==
-                        ConnectivityResult.wifi ||
-                    appController.results.first.obs.value ==
-                        ConnectivityResult.vpn ||
-                    appController.results.first.obs.value !=
-                        ConnectivityResult.vpn
-                ? appController.user.value == null
-                    ? const WelcomePage()
-                    : const ViewPage()
-                : const NoInternetPage();
-          } else {
-            return const SplashScreen();
-          }
-        },
-      ),
-      getPages: [
-        GetPage(
-          name: HomePage.routeName,
-          page: () => const HomePage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: WelcomePage.routeName,
-          page: () => const WelcomePage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: RegisterPage.routeName,
-          page: () => const RegisterPage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: LoginPage.routeName,
-          page: () => const LoginPage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: PolicyPage.routeName,
-          page: () => const PolicyPage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: ForgotPage.routeName,
-          page: () => const ForgotPage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: ResetPage.routeName,
-          page: () => const ResetPage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: SearchPage.routeName,
-          page: () => const SearchPage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: ProductsPage.routeName,
-          page: () => const ProductsPage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: ChatPage.routeName,
-          page: () => const ChatPage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: ProfilePage.routeName,
-          page: () => const ProfilePage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: EditProfilePage.routeName,
-          page: () => const EditProfilePage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: AdminPanelPage.routeName,
-          page: () => const AdminPanelPage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: DetailsPage.routeName,
-          page: () => const DetailsPage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: EditProductPage.routeName,
-          page: () => const EditProductPage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-        GetPage(
-          name: NewProductPage.routeName,
-          page: () => const NewProductPage(),
-          curve: Curves.ease,
-          transition: Transition.leftToRightWithFade,
-        ),
-      ],
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: "JavidCoffee",
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('fa'), Locale("en")],
+          locale: const Locale("fa"),
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          themeMode: ThemeMode.system,
+          home: Obx(
+            () {
+              if (kIsWeb) {
+                if (appController.user.value == null) {
+                  return const WelcomePage();
+                } else {
+                  return const ViewPage();
+                }
+              } else {
+                if (appController.results.isNotEmpty) {
+                  if (appController.results.first.obs.value ==
+                          ConnectivityResult.mobile ||
+                      appController.results.first.obs.value ==
+                          ConnectivityResult.wifi ||
+                      appController.results.first.obs.value ==
+                          ConnectivityResult.vpn ||
+                      appController.results.first.obs.value !=
+                          ConnectivityResult.vpn) {
+                    if (appController.user.value == null) {
+                      return const WelcomePage();
+                    } else {
+                      return const ViewPage();
+                    }
+                  } else {
+                    return const NoInternetPage();
+                  }
+                } else {
+                  return const SplashScreen();
+                }
+              }
+            },
+          ),
+          getPages: [
+            GetPage(
+              name: HomePage.routeName,
+              page: () => const HomePage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: WelcomePage.routeName,
+              page: () => const WelcomePage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: RegisterPage.routeName,
+              page: () => const RegisterPage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: LoginPage.routeName,
+              page: () => const LoginPage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: PolicyPage.routeName,
+              page: () => const PolicyPage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: ForgotPage.routeName,
+              page: () => const ForgotPage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: ResetPage.routeName,
+              page: () => const ResetPage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: SearchPage.routeName,
+              page: () => const SearchPage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: ProductsPage.routeName,
+              page: () => const ProductsPage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: ChatPage.routeName,
+              page: () => const ChatPage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: ProfilePage.routeName,
+              page: () => const ProfilePage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: EditProfilePage.routeName,
+              page: () => const EditProfilePage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: AdminPanelPage.routeName,
+              page: () => const AdminPanelPage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: DetailsPage.routeName,
+              page: () => const DetailsPage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: EditProductPage.routeName,
+              page: () => const EditProductPage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+            GetPage(
+              name: NewProductPage.routeName,
+              page: () => const NewProductPage(),
+              curve: Curves.ease,
+              transition: Transition.leftToRightWithFade,
+            ),
+          ],
+        );
+      },
     );
   }
 }

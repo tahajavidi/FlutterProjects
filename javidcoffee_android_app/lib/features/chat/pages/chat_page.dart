@@ -5,6 +5,7 @@ import 'package:javidcoffee_android_app/config/responsive.dart';
 import 'package:javidcoffee_android_app/config/size_config.dart';
 import 'package:javidcoffee_android_app/features/chat/components/chat_bubble.dart';
 import 'package:javidcoffee_android_app/features/chat/controllers/chat_controller.dart';
+import 'package:sizer/sizer.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -39,24 +40,25 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    if (Responsive.isMobile(context)) {
-      return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text("AI Chat"),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: IconButton.filledTonal(
-                onPressed: () {
-                  chatController.messages.clear();
-                },
-                icon: const Icon(Icons.delete_rounded),
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("AI Chat"),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: IconButton.filledTonal(
+              onPressed: () {
+                chatController.messages.clear();
+              },
+              icon: const Icon(Icons.delete_rounded),
             ),
-          ],
-        ),
-        body: SafeArea(
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(bottom: Responsive.isMobile ? 2.h : 3.h),
+        child: SafeArea(
           child: Column(
             children: [
               Expanded(
@@ -112,8 +114,8 @@ class _ChatPageState extends State<ChatPage> {
                         ),
                       ),
                       Container(
-                        height: 60,
-                        width: 60,
+                        height: 56.5,
+                        width: 56.5,
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.primaryContainer,
                           borderRadius: BorderRadius.circular(5),
@@ -134,11 +136,7 @@ class _ChatPageState extends State<ChatPage> {
             ],
           ),
         ),
-      );
-    } else {
-      return const Scaffold(
-        body: Center(),
-      );
-    }
+      ),
+    );
   }
 }

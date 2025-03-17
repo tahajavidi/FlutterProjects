@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:javidcoffee_android_app/config/responsive.dart';
 import 'package:javidcoffee_android_app/features/home/components/slider_banner.dart';
 import 'package:javidcoffee_android_app/features/home/controllers/home_controller.dart';
+import 'package:sizer/sizer.dart';
 
 class HomeSlider extends StatelessWidget {
   final HomeController homeController;
@@ -19,6 +20,8 @@ class HomeSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Responsive().init(100.w);
+
     return Animate(
       effects: [const FadeEffect(delay: Duration(milliseconds: 100))],
       child: CarouselSlider(
@@ -29,10 +32,11 @@ class HomeSlider extends StatelessWidget {
             )
             .toList(),
         options: CarouselOptions(
-          height: Responsive.isTablet(context) ? 270 : 220,
+          height: Responsive.isMobile ? 28.h : 30.h,
           viewportFraction: viewportFraction,
           autoPlay: true,
           onPageChanged: (index, reason) => onPageChanged(index),
+          enlargeCenterPage: true,
         ),
       ),
     );

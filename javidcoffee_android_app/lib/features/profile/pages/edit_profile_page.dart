@@ -55,7 +55,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   spacing: 20.0,
                   children: [
-                    if (editProfileController.selectedImage.value.path.isEmpty)
+                    if (editProfileController
+                                .profileController.userData["profile_image"] !=
+                            "" &&
+                        editProfileController
+                                .profileController.userData["profile_image"] !=
+                            null)
                       CachedNetworkImage(
                         imageUrl: editProfileController
                             .profileController.userData["profile_image"],

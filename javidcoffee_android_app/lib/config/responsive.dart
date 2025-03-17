@@ -1,30 +1,14 @@
-import 'package:flutter/material.dart';
+class Responsive {
+  static late bool isMobile;
+  static late bool isTablet;
 
-class Responsive extends StatelessWidget {
-  final Widget mobile;
-  final Widget tablet;
-  const Responsive({
-    super.key,
-    required this.tablet,
-    required this.mobile,
-  });
-
-  //* mobile
-  static bool isMobile(BuildContext context) =>
-      MediaQuery.of(context).size.width < 650;
-
-  //* tablet
-  static bool isTablet(BuildContext context) =>
-      MediaQuery.of(context).size.width >= 650;
-
-  @override
-  Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
-    if (size.width >= 650) {
-      return tablet;
+  void init(double width) {
+    if (width < 600) {
+      isMobile = true;
+      isTablet = false;
     } else {
-      return mobile;
+      isMobile = false;
+      isTablet = true;
     }
   }
 }

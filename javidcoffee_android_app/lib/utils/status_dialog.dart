@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';
 
 class StatusDialog {
@@ -11,11 +12,11 @@ class StatusDialog {
       ),
       padding: const EdgeInsets.all(5.0),
       snackPosition: SnackPosition.BOTTOM,
-      titleText: const Center(
+      titleText: Center(
         child: Text(
           "خطا",
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 22.sp,
             fontWeight: FontWeight.bold,
             color: Colors.redAccent,
             fontFamily: "IranianSans",
@@ -25,8 +26,8 @@ class StatusDialog {
       messageText: Center(
         child: Text(
           message,
-          style: const TextStyle(
-            fontSize: 15,
+          style: TextStyle(
+            fontSize: 15.sp,
             fontWeight: FontWeight.w600,
             fontFamily: "Vazir",
             color: Colors.white,
@@ -47,12 +48,12 @@ class StatusDialog {
       ),
       padding: const EdgeInsets.all(5.0),
       snackPosition: SnackPosition.BOTTOM,
-      titleText: const Center(
+      titleText: Center(
         child: Center(
           child: Text(
             "موفق",
             style: TextStyle(
-              fontSize: 22,
+              fontSize: 22.sp,
               fontWeight: FontWeight.bold,
               color: Colors.green,
               fontFamily: "IranianSans",
@@ -63,8 +64,8 @@ class StatusDialog {
       messageText: Center(
         child: Text(
           message,
-          style: const TextStyle(
-            fontSize: 15,
+          style: TextStyle(
+            fontSize: 15.sp,
             fontWeight: FontWeight.w600,
             fontFamily: "Vazir",
             color: Colors.white,
@@ -85,11 +86,11 @@ class StatusDialog {
       padding: const EdgeInsets.all(5.0),
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 6),
-      titleText: const Center(
+      titleText: Center(
         child: Text(
           "هشدار",
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 22.sp,
             fontWeight: FontWeight.bold,
             color: Colors.amber,
             fontFamily: "IranianSans",
@@ -99,8 +100,8 @@ class StatusDialog {
       messageText: Center(
         child: Text(
           message,
-          style: const TextStyle(
-            fontSize: 15,
+          style: TextStyle(
+            fontSize: 15.sp,
             fontWeight: FontWeight.w600,
             fontFamily: "Vazir",
             color: Colors.white,

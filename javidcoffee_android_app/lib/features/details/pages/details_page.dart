@@ -50,7 +50,7 @@ class _DetailsPageState extends State<DetailsPage> {
             spacing: 25.0,
             children: [
               Hero(
-                tag: "${widget.pr!.id}_${widget.pr!.image![0]}",
+                tag: "${widget.pr!.image![0]}_${widget.pr!.id}_hero",
                 child: Container(
                   height: SizeConfig.screenHeight * 0.42,
                   decoration: BoxDecoration(

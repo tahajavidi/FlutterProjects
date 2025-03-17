@@ -5,6 +5,7 @@ class AuthField extends StatelessWidget {
   final Widget suffixIcon;
   final bool obscureText;
   final TextEditingController controller;
+  final int? maxLength;
 
   const AuthField({
     super.key,
@@ -12,6 +13,7 @@ class AuthField extends StatelessWidget {
     required this.suffixIcon,
     required this.obscureText,
     required this.controller,
+    this.maxLength,
   });
 
   @override
@@ -19,6 +21,7 @@ class AuthField extends StatelessWidget {
     return TextField(
       controller: controller,
       obscureText: obscureText,
+      maxLength: maxLength,
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
         labelText: labelText,

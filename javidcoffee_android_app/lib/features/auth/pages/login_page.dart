@@ -7,6 +7,7 @@ import 'package:javidcoffee_android_app/config/size_config.dart';
 import 'package:javidcoffee_android_app/features/auth/components/auth_field.dart';
 import 'package:javidcoffee_android_app/features/auth/controllers/login_controller.dart';
 import 'package:javidcoffee_android_app/features/auth/pages/forgot_page.dart';
+import 'package:sizer/sizer.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -23,24 +24,25 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    Responsive().init(100.w);
 
-    if (Responsive.isMobile(context)) {
-      return Scaffold(
+    return Sizer(
+      builder: (p0, p1, p2) => Scaffold(
         body: Obx(
           () => Center(
             child: loginController.loginLoading.value == false
                 ? SingleChildScrollView(
                     child: Column(
-                      spacing: 50,
+                      spacing: Responsive.isMobile ? 8.h : 10.h,
                       children: [
                         FadeInDown(
                           animate: true,
                           delay: const Duration(milliseconds: 300),
                           duration: const Duration(milliseconds: 800),
-                          child: const Text(
+                          child: Text(
                             "دوست عزیز\nلطفا به حساب خود وارد شوید!",
                             style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
+                                fontSize: 19.sp, fontWeight: FontWeight.bold),
                           ),
                         ),
                         FadeInUp(
@@ -49,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                           duration: const Duration(milliseconds: 800),
                           child: Padding(
                             padding: EdgeInsets.symmetric(
-                              horizontal: SizeConfig.screenWidth * 0.08,
+                              horizontal: Responsive.isMobile ? 8.w : 16.w,
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                                       const Icon(FontAwesomeIcons.envelope),
                                   obscureText: false,
                                 ),
-                                const SizedBox(height: 20),
+                                SizedBox(height: 2.h),
                                 AuthField(
                                   controller:
                                       loginController.passwordController,
@@ -74,34 +76,38 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   obscureText: loginController.isHidePass.value,
                                 ),
-                                const SizedBox(height: 60),
                                 SizedBox(
-                                  height: 55,
-                                  width: SizeConfig.screenWidth * 0.8,
+                                    height: Responsive.isTablet ? 10.h : 8.h),
+                                SizedBox(
+                                  height: 7.h,
+                                  width: Responsive.isTablet ? 60.w : 80.w,
                                   child: FilledButton(
                                     onPressed: loginController.loginUser,
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
                                         "ورود",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 22,
+                                          fontSize: Responsive.isMobile
+                                              ? 20.sp
+                                              : 18.sp,
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 25),
+                                SizedBox(height: 3.3.h),
                                 Align(
                                   alignment: Alignment.bottomRight,
                                   child: TextButton(
                                     onPressed: () {
                                       Get.toNamed(ForgotPage.routeName);
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       "رمز عبور خود را فراموش کرده اید؟",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize:
+                                            Responsive.isTablet ? 15.sp : 16.sp,
                                         fontWeight: FontWeight.w700,
                                         fontStyle: FontStyle.italic,
                                         textBaseline: TextBaseline.ideographic,
@@ -118,10 +124,12 @@ class _LoginPageState extends State<LoginPage> {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      const Text(
+                                      Text(
                                         "حساب کاربری ندارید؟",
                                         style: TextStyle(
-                                          fontSize: 14,
+                                          fontSize: Responsive.isMobile
+                                              ? 14.sp
+                                              : 13.sp,
                                           fontWeight: FontWeight.w600,
                                           fontStyle: FontStyle.normal,
                                           textBaseline:
@@ -133,10 +141,12 @@ class _LoginPageState extends State<LoginPage> {
                                         onPressed: () {
                                           Get.back();
                                         },
-                                        child: const Text(
+                                        child: Text(
                                           "ثبت نام کنید",
                                           style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: Responsive.isMobile
+                                                ? 16.sp
+                                                : 15.sp,
                                             fontWeight: FontWeight.bold,
                                             fontStyle: FontStyle.italic,
                                             textBaseline:
@@ -160,151 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                 : const CircularProgressIndicator(),
           ),
         ),
-      );
-    } else {
-      return Scaffold(
-        body: Obx(
-          () => Center(
-            child: SingleChildScrollView(
-              child: Column(
-                spacing: 50,
-                children: [
-                  FadeInDown(
-                    animate: true,
-                    delay: const Duration(milliseconds: 300),
-                    duration: const Duration(milliseconds: 800),
-                    child: const Text(
-                      "دوست عزیز\nلطفا به حساب خود وارد شوید!",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const SizedBox(height: 50),
-                  FadeInUp(
-                    animate: true,
-                    delay: const Duration(milliseconds: 300),
-                    duration: const Duration(milliseconds: 800),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: SizeConfig.screenWidth * 0.1,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          AuthField(
-                            controller: loginController.emailController,
-                            labelText: "آدرس ایمیل",
-                            suffixIcon: const Icon(FontAwesomeIcons.envelope),
-                            obscureText: false,
-                          ),
-                          const SizedBox(height: 20),
-                          AuthField(
-                            controller: loginController.passwordController,
-                            labelText: "رمز عبور",
-                            suffixIcon: IconButton(
-                              onPressed: loginController.toggleHidePass,
-                              icon: loginController.isHidePass.value
-                                  ? const Icon(FontAwesomeIcons.eye)
-                                  : const Icon(FontAwesomeIcons.eyeSlash),
-                            ),
-                            obscureText: loginController.isHidePass.value,
-                          ),
-                          const SizedBox(height: 60),
-                          loginController.loginLoading.value == false
-                              ? SizedBox(
-                                  height: 65,
-                                  width: SizeConfig.screenWidth * 0.6,
-                                  child: FilledButton(
-                                    onPressed: loginController.loginUser,
-                                    child: const Center(
-                                      child: Text(
-                                        "ورود",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : const Center(
-                                  child: CircularProgressIndicator()),
-                          const SizedBox(height: 25),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              right: SizeConfig.screenWidth * 0.05,
-                            ),
-                            child: Align(
-                              alignment: Alignment.bottomRight,
-                              child: TextButton(
-                                onPressed: () {
-                                  Get.toNamed(ForgotPage.routeName);
-                                },
-                                child: const Text(
-                                  "رمز عبور خود را فراموش کرده اید؟",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    fontStyle: FontStyle.italic,
-                                    textBaseline: TextBaseline.ideographic,
-                                    overflow: TextOverflow.fade,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 7),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: SizeConfig.screenWidth * 0.05,
-                            ),
-                            child: Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  const Text(
-                                    "حساب کاربری ندارید؟",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.normal,
-                                      textBaseline: TextBaseline.ideographic,
-                                      overflow: TextOverflow.fade,
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    child: const Text(
-                                      "ثبت نام کنید",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.italic,
-                                        textBaseline: TextBaseline.ideographic,
-                                        overflow: TextOverflow.fade,
-                                        decoration: TextDecoration.underline,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    }
+      ),
+    );
   }
 }

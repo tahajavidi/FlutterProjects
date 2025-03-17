@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:javidcoffee_android_app/config/responsive.dart';
 import 'package:javidcoffee_android_app/config/size_config.dart';
 import 'package:javidcoffee_android_app/features/details/pages/details_page.dart';
 import 'package:javidcoffee_android_app/features/home/models/product.dart';
+import 'package:sizer/sizer.dart';
 
 class ProductCarousel extends StatelessWidget {
   final RxList<dynamic> snapshot;
@@ -18,17 +20,16 @@ class ProductCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    Responsive().init(100.w);
 
     List<Product> list = snapshot.map((e) => Product.fromJson(e)).toList();
 
     return Animate(
       effects: [const FadeEffect(delay: Duration(milliseconds: 100))],
       child: Container(
-        height: SizeConfig.screenHeight * 0.225,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 5.0,
-          vertical: 10.0,
-        ),
+        height: Responsive.isMobile ? 170 : 300,
+        width: 100.w,
+        padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 1),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: list.length,
@@ -37,15 +38,16 @@ class ProductCarousel extends StatelessWidget {
 
             return InkWell(
               onTap: () => Get.to(DetailsPage(pr: pr)),
+              borderRadius: BorderRadius.circular(12.0.sp),
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 3.0),
+                margin: EdgeInsets.symmetric(horizontal: 0.8.w),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 decoration: BoxDecoration(
                   color: Theme.of(context)
                       .colorScheme
                       .primaryContainer
                       .withValues(alpha: 0.5),
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(13.5.sp),
                   border: Border.all(
                     color: Colors.transparent,
                     width: 2.5,
@@ -54,54 +56,62 @@ class ProductCarousel extends StatelessWidget {
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 4.0,
+                    spacing: 3,
                     children: [
-                      Hero(
-                        tag: "${pr.id}_${pr.image![0]}",
-                        child: CachedNetworkImage(
-                          height: 120,
-                          width: 170,
-                          imageUrl: pr.image![0],
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) => Center(
-                            child: CircularProgressIndicator(
-                                value: downloadProgress.progress),
-                          ),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                          fit: BoxFit.fill,
-                          imageBuilder: (context, imageProvider) => Container(
+                      CachedNetworkImage(
+                        height: Responsive.isTablet ? 180 : 100,
+                        width: Responsive.isMobile ? 120 : 235,
+                        imageUrl: pr.image![0],
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) => Center(
+                          child: CircularProgressIndicator(
+                              value: downloadProgress.progress),
+                        ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        fit: BoxFit.fitWidth,
+                        imageBuilder: (context, imageProvider) => Hero(
+                          tag: "${pr.image![0]}_${pr.id}_hero",
+                          child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(8.0),
-                                topRight: Radius.circular(8.0),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(12.0.sp),
+                                topRight: Radius.circular(12.0.sp),
                               ),
                               image: DecorationImage(
                                 image: imageProvider,
-                                fit: BoxFit.fill,
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: Text(
-                          pr.title!,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
+                        padding: EdgeInsets.symmetric(horizontal: 1.w),
+                        child: SizedBox(
+                          width: Responsive.isMobile ? 110 : 225,
+                          child: Text(
+                            pr.title!,
+                            softWrap: false,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14.5.sp,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        padding: EdgeInsets.symmetric(horizontal: 1.w),
                         child: Text(
                           "${NumberFormat.decimalPatternDigits(locale: "fa", decimalDigits: 0).format(pr.price)} تومان",
                           maxLines: 2,
-                          style: Theme.of(context).textTheme.labelSmall!,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13.5.sp,
+                          ),
                         ),
                       ),
                     ],

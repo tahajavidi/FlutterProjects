@@ -41,7 +41,7 @@ class ProductCardItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Hero(
-            tag: "${pr.id}_${pr.image![0]}",
+            tag: "${pr.image![0]}_${pr.id}_hero",
             child: ProductImage(pr: pr),
           ),
           ProductReview(pr: pr),
