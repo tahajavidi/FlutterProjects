@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -5,6 +6,7 @@ class ProductsController extends GetxController {
   late Future<dynamic> gridData;
 
   final SupabaseClient supabaseClient = Supabase.instance.client;
+  final ScrollController scrollController = ScrollController();
 
   Future<dynamic> getGridData() async {
     final Future<dynamic> future =

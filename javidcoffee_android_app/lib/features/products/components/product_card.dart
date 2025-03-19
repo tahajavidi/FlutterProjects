@@ -68,7 +68,7 @@ class ProductImage extends StatelessWidget {
         border: Border.all(color: Colors.grey[300]!, width: 1.5),
         image: DecorationImage(
           image: NetworkImage(pr.image![0]),
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
           alignment: Alignment.bottomCenter,
         ),
       ),

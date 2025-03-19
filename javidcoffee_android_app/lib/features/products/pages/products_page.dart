@@ -27,9 +27,7 @@ class _ProductsPageState extends State<ProductsPage> {
           if (snapshot.hasData) {
             return ProductGridView(
               snapshot: snapshot,
-              flex: 5,
-              crossAxisCount: 2,
-              childAspectRatio: 0.7,
+              productsController: productsController,
             );
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

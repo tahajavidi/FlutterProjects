@@ -26,6 +26,7 @@
 			"name": "javidcoffee_android_app (release mode)",
 			"request": "launch",
 			"type": "dart",
+			"deviceId": "2412DPC0AG",
 			"flutterMode": "release"
 		}
 	]
